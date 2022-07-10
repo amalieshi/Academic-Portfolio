@@ -1,0 +1,1248 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Problem_2</title><meta name="generator" content="MATLAB 9.2"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-10-16"><meta name="DC.source" content="Problem_2.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#1">HW 4. Problem 2</a></li><li><a href="#2">(B)</a></li><li><a href="#3">(C)</a></li><li><a href="#4">(D)</a></li><li><a href="#5">(E)</a></li><li><a href="#6">(F)</a></li><li><a href="#7">(G)</a></li></ul></div><h2 id="1">HW 4. Problem 2</h2><pre class="codeinput">Ri = 100;
+Rm = 10000;
+Cm = 1;
+Er = 0;
+
+Gi =1/Ri;
+Gm = 1/Rm;
+
+la = 0.1;
+lb = 0.025;
+lc = 0.05;
+
+ra = 0.0005;
+rb = 0.000125;
+rc = 0.000125;
+
+Iapp = 1e-9;
+
+num_comp_a = 2; <span class="comment">%number of compartments in a</span>
+num_comp_b = 2;
+num_comp_c = 2;
+
+ind_l_a = la/num_comp_a;
+ind_l_b = lb/num_comp_b;
+ind_l_c = lc/num_comp_c;
+
+A = NaN(1,num_comp_a);
+B = NaN(1,num_comp_b);
+C = NaN(1,num_comp_c);
+
+A(:) = ind_l_a;
+B(:) = ind_l_b;
+C(:) = ind_l_c;
+
+matrix_length_compartment =[A,B,C];
+
+A(:) = ra;
+B(:) = rb;
+C(:) = rc;
+
+matrix_radius_compartment =[A,B,C];
+
+gi = pi .* matrix_radius_compartment.^2 ./ matrix_length_compartment .* Gi;
+cj = 2*pi.*matrix_radius_compartment.*matrix_length_compartment*Cm;
+gjm = 2*pi.*matrix_radius_compartment.*matrix_length_compartment*Gm;
+
+n=num_comp_a+num_comp_b+num_comp_c;
+A = zeros(n,n);
+B = A;
+v = zeros(n,1);
+u = v;
+u(num_comp_a+num_comp_b,1)=Iapp;
+<span class="keyword">for</span> i = 1:n
+    B(i,i)=(1/cj(i));
+    <span class="keyword">if</span> i == 1 <span class="comment">%Initial mode</span>
+        A(i,i)=-(gjm(i)+gi(i+1))/cj(i);
+        A(i,i+1)=gi(i+1)/cj(i);
+    <span class="keyword">elseif</span> i == num_comp_a <span class="comment">%Prebranch mode</span>
+        A(i,i-1)= gi(i)/cj(i);
+        A(i,i) =-(gi(i)+gjm(i)+gi(i+1)+gi(num_comp_a+num_comp_b+1))/cj(i);
+        A(i,i+1)= gi(i+1)/cj(i);
+        A(i,i+num_comp_b+1) = gi(i+num_comp_b+1)/cj(i);
+    <span class="keyword">elseif</span> i == num_comp_a+num_comp_b+1 <span class="comment">%Afterbranch mode</span>
+        A(i,i-num_comp_b-1)= gi(i)/cj(i);
+        A(i,i)=-(gi(i)+gjm(i)+gi(i+1))/cj(i);
+        A(i,i+1)= gi(i+1)/cj(i);
+    <span class="keyword">elseif</span> i == num_comp_a+num_comp_b <span class="comment">% End of the subbranch</span>
+        A(i,i-1)= gi(i)/cj(i);
+        A(i,i) =-(gi(i)+gjm(i))/cj(i);
+    <span class="keyword">elseif</span> i ==  num_comp_a +num_comp_b+num_comp_c <span class="comment">%End of the subbranch</span>
+        A(i,i-1)= gi(i)/cj(i);
+        A(i,i)=-(gi(i)+gjm(i))/cj(i);
+    <span class="keyword">else</span>
+        A(i,i-1)= gi(i)/cj(i);
+        A(i,i)=-(gi(i)+gjm(i)+gi(i+1))/cj(i);
+        A(i,i+1)= gi(i+1)/cj(i);
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+v = -inv(A)*B*u;
+<span class="comment">% i</span>
+disp(<span class="string">'For i, I directly wrote the matrix A in the loop so my answer is in my code'</span>)
+<span class="comment">% iii</span>
+disp(<span class="string">'B='</span>)
+disp(B)
+<span class="comment">% iv</span>
+disp(<span class="string">'u='</span>)
+disp(u)
+</pre><pre class="codeoutput">For i, I directly wrote the matrix A in the loop so my answer is in my code
+B=
+   1.0e+05 *
+
+    0.0637         0         0         0         0         0
+         0    0.0637         0         0         0         0
+         0         0    1.0186         0         0         0
+         0         0         0    1.0186         0         0
+         0         0         0         0    0.5093         0
+         0         0         0         0         0    0.5093
+
+u=
+   1.0e-09 *
+
+         0
+         0
+         0
+    1.0000
+         0
+         0
+
+</pre><h2 id="2">(B)</h2><p>Analytical</p><pre class="codeinput">alambda = sqrt((ra*Rm)/(2*Ri));
+blambda = sqrt((rb*Rm)/(2*Ri));
+clambda = sqrt((rc*Rm)/(2*Ri));
+
+La=la/alambda;
+Lb=lb/blambda;
+Lc=lc/clambda;
+
+Ga_inf =(pi*(ra^2))/(Ri*alambda);
+Gb_inf =(pi*(rb^2))/(Ri*blambda);
+Gc_inf =(pi*(rc^2))/(Ri*clambda);
+
+Gb_out = Ga_inf * tanh(La)+Gc_inf * tanh(Lc);
+
+Gb_in = Gb_inf * (Gb_out/Gb_inf+tanh(Lb))/(1+Gb_out/Gb_inf*tanh(Lb));
+
+Vb_0 = Iapp/Gb_in;
+Va_0 = Vb_0 * 1/(cosh(Lb)+Gb_out/Gb_inf*sinh(Lb));
+Vc_0 = Va_0;
+
+Va_X =@(X) Va_0 * cosh(La-X)/cosh(La);
+Vb_X =@(X) Vb_0 * (cosh(Lb-X)+(Gb_out/Gb_inf * sinh(Lb-X)))/(cosh(Lb)+(Gb_out/Gb_inf * sinh(Lb)));
+Vc_X =@(X) Vc_0 * cosh(Lc-X)/cosh(Lc);
+
+Xa = linspace(0,La,num_comp_a);
+Xb = linspace(0,Lb,num_comp_b);
+Xc = linspace(0,Lc,num_comp_c);
+
+preflip = Va_X(Xa);
+flip_Va = fliplr(preflip);
+
+preflip = Vb_X(Xb);
+flip_Vb = fliplr(preflip);
+
+copyvc = Vc_X(Xc);
+
+<span class="comment">% Numerical (Compartmental)</span>
+V = zeros(n,2);
+V(:,1) = v;
+<span class="keyword">for</span> i = 1: num_comp_a
+    V(i,2)=(ind_l_a/alambda)*i;
+<span class="keyword">end</span>
+
+<span class="keyword">for</span> i = num_comp_a+1 : num_comp_a + num_comp_b
+    V(i,2)=2*(ind_l_a/alambda)+(ind_l_b/blambda)*(n-num_comp_a);
+<span class="keyword">end</span>
+
+<span class="keyword">for</span> i = num_comp_a+num_comp_b+1 : num_comp_a+num_comp_b+num_comp_c
+    V(i,2)=2*(ind_l_a/alambda)+(ind_l_c/clambda)*(n-num_comp_a-num_comp_b);
+<span class="keyword">end</span>
+
+figure; clf; hold <span class="string">on</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+plot(Xa,flip_Va,<span class="string">'r'</span>,<span class="string">'DisplayName'</span>,<span class="string">'La - Analytical'</span>)
+plot(Xb+La,flip_Vb,<span class="string">'b'</span>,<span class="string">'DisplayName'</span>,<span class="string">'Lb - Analytical'</span>)
+plot(Xc+La,copyvc,<span class="string">'g'</span>,<span class="string">'DisplayName'</span>,<span class="string">'Lc - Analytical'</span>)
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+plot(Xa,V(1:num_comp_a,1),<span class="string">'r--'</span>,<span class="string">'DisplayName'</span>,<span class="string">'La - Numerical'</span>)
+plot(Xb+La,V(num_comp_a+1 : num_comp_a + num_comp_b,1),<span class="string">'b--'</span>,<span class="string">'DisplayName'</span>,<span class="string">'Lb - Numerical'</span>)
+plot(Xc+La,V(num_comp_a+num_comp_b+1 : num_comp_a+num_comp_b+num_comp_c,1),<span class="keyword">...</span>
+    <span class="string">'g--'</span>,<span class="string">'DisplayName'</span>,<span class="string">'Lc - Numerical'</span>);
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+legend(<span class="string">'Show'</span>, <span class="string">'Location'</span>, <span class="string">'Best'</span>)
+xlabel(<span class="string">'Dimensionless Length'</span>); ylabel(<span class="string">'V [mV]'</span>);
+title(<span class="string">'Steady State voltage across all branches vs. dimensionless distance from the soma'</span>);
+axis <span class="string">tight</span>; axis <span class="string">manual</span>
+disp(<span class="string">'The numerical solution does not match completely with the anayltical solution because of the small number of compartments but the trend is similar'</span>)
+</pre><pre class="codeoutput">The numerical solution does not match completely with the anayltical solution because of the small number of compartments but the trend is similar
+</pre><img vspace="5" hspace="5" src="Problem_2_01.png" alt=""> <h2 id="3">(C)</h2><pre class="codeinput">num_comp_a_min = ceil(la/(alambda*0.1));
+num_comp_b_min = ceil(lb/(blambda*0.1));
+num_comp_c_min = ceil(lc/(clambda*0.1));
+
+disp(<span class="string">'the minimum number of compartments in A is'</span>)
+disp(num_comp_a_min)
+disp(<span class="string">'the minimum number of compartments in B is'</span>)
+disp(num_comp_b_min)
+disp(<span class="string">'the minimum number of compartments in C is'</span>)
+disp(num_comp_c_min)
+</pre><pre class="codeoutput">the minimum number of compartments in A is
+     7
+
+the minimum number of compartments in B is
+     4
+
+the minimum number of compartments in C is
+     7
+
+</pre><h2 id="4">(D)</h2><pre class="codeinput">num_comp_a = 10; <span class="comment">%number of compartments in a</span>
+num_comp_b = 5;
+num_comp_c = 10;
+
+ind_l_a = la/num_comp_a;
+ind_l_b = lb/num_comp_b;
+ind_l_c = lc/num_comp_c;
+
+A = NaN(1,num_comp_a);
+B = NaN(1,num_comp_b);
+C = NaN(1,num_comp_c);
+
+A(:) = ind_l_a;
+B(:) = ind_l_b;
+C(:) = ind_l_c;
+
+matrix_length_compartment =[A,B,C];
+
+A(:) = ra;
+B(:) = rb;
+C(:) = rc;
+
+matrix_radius_compartment =[A,B,C];
+
+gi = pi .* matrix_radius_compartment.^2 ./ matrix_length_compartment .* Gi;
+cj = 2*pi.*matrix_radius_compartment.*matrix_length_compartment*Cm;
+gjm = 2*pi.*matrix_radius_compartment.*matrix_length_compartment*Gm;
+
+n=num_comp_a+num_comp_b+num_comp_c;
+A = zeros(n,n);
+B = A;
+v = zeros(n,1);
+u = v;
+u(num_comp_a+num_comp_b,1)=Iapp;
+<span class="keyword">for</span> i = 1:n
+    B(i,i)=(1/cj(i));
+    <span class="keyword">if</span> i == 1 <span class="comment">%Initial mode</span>
+        A(i,i)=-(gjm(i)+gi(i+1))/cj(i);
+        A(i,i+1)=gi(i+1)/cj(i);
+    <span class="keyword">elseif</span> i == num_comp_a <span class="comment">%Prebranch mode</span>
+        A(i,i-1)= gi(i)/cj(i);
+        A(i,i) =-(gi(i)+gjm(i)+gi(i+1)+gi(num_comp_a+num_comp_b+1))/cj(i);
+        A(i,i+1)= gi(i+1)/cj(i);
+        A(i,i+num_comp_b+1) = gi(i+num_comp_b+1)/cj(i);
+    <span class="keyword">elseif</span> i == num_comp_a+num_comp_b+1 <span class="comment">%Afterbranch mode</span>
+        A(i,i-num_comp_b-1)= gi(i)/cj(i);
+        A(i,i)=-(gi(i)+gjm(i)+gi(i+1))/cj(i);
+        A(i,i+1)= gi(i+1)/cj(i);
+    <span class="keyword">elseif</span> i == num_comp_a+num_comp_b <span class="comment">% End of the subbranch</span>
+        A(i,i-1)= gi(i)/cj(i);
+        A(i,i) =-(gi(i)+gjm(i))/cj(i);
+    <span class="keyword">elseif</span> i ==  num_comp_a +num_comp_b+num_comp_c <span class="comment">%End of the subbranch</span>
+        A(i,i-1)= gi(i)/cj(i);
+        A(i,i)=-(gi(i)+gjm(i))/cj(i);
+    <span class="keyword">else</span>
+        A(i,i-1)= gi(i)/cj(i);
+        A(i,i)=-(gi(i)+gjm(i)+gi(i+1))/cj(i);
+        A(i,i+1)= gi(i+1)/cj(i);
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+v = -inv(A)*B*u;
+
+<span class="comment">% Analytical</span>
+alambda = sqrt((ra*Rm)/(2*Ri));
+blambda = sqrt((rb*Rm)/(2*Ri));
+clambda = sqrt((rc*Rm)/(2*Ri));
+
+La=la/alambda;
+Lb=lb/blambda;
+Lc=lc/clambda;
+
+Ga_inf =(pi*(ra^2))/(Ri*alambda);
+Gb_inf =(pi*(rb^2))/(Ri*blambda);
+Gc_inf =(pi*(rc^2))/(Ri*clambda);
+
+Gb_out = Ga_inf * tanh(La)+Gc_inf * tanh(Lc);
+
+Gb_in = Gb_inf * (Gb_out/Gb_inf+tanh(Lb))/(1+Gb_out/Gb_inf*tanh(Lb));
+
+Vb_0 = Iapp/Gb_in;
+Va_0 = Vb_0 * 1/(cosh(Lb)+Gb_out/Gb_inf*sinh(Lb));
+Vc_0 = Va_0;
+
+Va_X =@(X) Va_0 * cosh(La-X)/cosh(La);
+Vb_X =@(X) Vb_0 * (cosh(Lb-X)+(Gb_out/Gb_inf * sinh(Lb-X)))/(cosh(Lb)+(Gb_out/Gb_inf * sinh(Lb)));
+Vc_X =@(X) Vc_0 * cosh(Lc-X)/cosh(Lc);
+
+Xa = linspace(0,La,num_comp_a);
+Xb = linspace(0,Lb,num_comp_b);
+Xc = linspace(0,Lc,num_comp_c);
+
+preflip = Va_X(Xa);
+flip_Va = fliplr(preflip);
+
+preflip = Vb_X(Xb);
+flip_Vb = fliplr(preflip);
+
+copyvc = Vc_X(Xc);
+
+<span class="comment">% Numerical (Compartmental)</span>
+V = zeros(num_comp_a+num_comp_b+num_comp_c,2);
+V(:,1) = v;
+<span class="keyword">for</span> i = 1: num_comp_a
+    V(i,2)=(ind_l_a/alambda)*i;
+<span class="keyword">end</span>
+
+<span class="keyword">for</span> i = num_comp_a+1 : num_comp_a + num_comp_b
+    V(i,2)=2*(ind_l_a/alambda)+(ind_l_b/blambda)*(n-num_comp_a);
+<span class="keyword">end</span>
+
+<span class="keyword">for</span> i = num_comp_a+num_comp_b+1 : num_comp_a+num_comp_b+num_comp_c
+    V(i,2)=2*(ind_l_a/alambda)+(ind_l_c/clambda)*(n-num_comp_a-num_comp_b);
+<span class="keyword">end</span>
+
+figure; clf; hold <span class="string">on</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+plot(Xa,flip_Va,<span class="string">'r'</span>,<span class="string">'DisplayName'</span>,<span class="string">'La - Analytical'</span>)
+plot(Xb+La,flip_Vb,<span class="string">'b'</span>,<span class="string">'DisplayName'</span>,<span class="string">'Lb - Analytical'</span>)
+plot(Xc+La,copyvc,<span class="string">'g'</span>,<span class="string">'DisplayName'</span>,<span class="string">'Lc - Analytical'</span>)
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+plot(Xa,V(1:num_comp_a,1),<span class="string">'r--'</span>,<span class="string">'DisplayName'</span>,<span class="string">'La - Numerical'</span>)
+plot(Xb+La,V(num_comp_a+1 : num_comp_a + num_comp_b,1),<span class="string">'b--'</span>,<span class="string">'DisplayName'</span>,<span class="string">'Lb - Numerical'</span>)
+plot(Xc+La,V(num_comp_a+num_comp_b+1 : num_comp_a+num_comp_b+num_comp_c,1),<span class="keyword">...</span>
+    <span class="string">'g--'</span>,<span class="string">'DisplayName'</span>,<span class="string">'Lc - Numerical'</span>);
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+legend(<span class="string">'Show'</span>, <span class="string">'Location'</span>, <span class="string">'Best'</span>)
+xlabel(<span class="string">'Dimensionless Length'</span>); ylabel(<span class="string">'V [mV]'</span>);
+title(<span class="string">'Steady State voltage across all branches vs. dimensionless distance from the soma'</span>);
+axis <span class="string">tight</span>; axis <span class="string">manual</span>
+disp(<span class="string">'the answer in D has better fitting between the analytical solution and the numerical solution compare with part B, although the analytical solution does not match up with the numerical solution completely. This is because there are more compartments'</span>)
+</pre><pre class="codeoutput">the answer in D has better fitting between the analytical solution and the numerical solution compare with part B, although the analytical solution does not match up with the numerical solution completely. This is because there are more compartments
+</pre><img vspace="5" hspace="5" src="Problem_2_02.png" alt=""> <h2 id="5">(E)</h2><pre class="codeinput">dvdt =@(V1) A*V1+ B*u;
+t_span =linspace(0,3e5,100000);
+V0 = zeros(1,n);
+tc = Rm * Cm;
+[t,V1]=ode23(@(t,V1) dvdt(V1),t_span,V0);
+
+figure;clf; hold <span class="string">on</span>;
+xlabel(<span class="string">'T'</span>); ylabel(<span class="string">'V(X) [mV]'</span>);
+title(<span class="string">'membrane potential at the soma over dimensionless time'</span>)
+<span class="keyword">for</span> i = 1:n
+plot(t/tc,V1(:,i))
+<span class="keyword">end</span>
+</pre><img vspace="5" hspace="5" src="Problem_2_03.png" alt=""> <h2 id="6">(F)</h2><pre class="codeinput">num_comp_a = 100; <span class="comment">%number of compartments in a</span>
+num_comp_b = 50;
+num_comp_c = 100;
+
+ind_l_a = la/num_comp_a;
+ind_l_b = lb/num_comp_b;
+ind_l_c = lc/num_comp_c;
+
+A = NaN(1,num_comp_a);
+B = NaN(1,num_comp_b);
+C = NaN(1,num_comp_c);
+
+A(:) = ind_l_a;
+B(:) = ind_l_b;
+C(:) = ind_l_c;
+
+matrix_length_compartment =[A,B,C];
+
+A(:) = ra;
+B(:) = rb;
+C(:) = rc;
+
+matrix_radius_compartment =[A,B,C];
+
+gi = pi .* matrix_radius_compartment.^2 ./ matrix_length_compartment .* Gi;
+cj = 2*pi.*matrix_radius_compartment.*matrix_length_compartment*Cm;
+gjm = 2*pi.*matrix_radius_compartment.*matrix_length_compartment*Gm;
+
+n=num_comp_a+num_comp_b+num_comp_c;
+A = zeros(n,n);
+B = A;
+v = zeros(n,1);
+u = v;
+u(num_comp_a+num_comp_b,1)=Iapp;
+<span class="keyword">for</span> i = 1:n
+    B(i,i)=(1/cj(i));
+    <span class="keyword">if</span> i == 1 <span class="comment">%Initial mode</span>
+        A(i,i)=-(gjm(i)+gi(i+1))/cj(i);
+        A(i,i+1)=gi(i+1)/cj(i);
+    <span class="keyword">elseif</span> i == num_comp_a <span class="comment">%Prebranch mode</span>
+        A(i,i-1)= gi(i)/cj(i);
+        A(i,i) =-(gi(i)+gjm(i)+gi(i+1)+gi(num_comp_a+num_comp_b+1))/cj(i);
+        A(i,i+1)= gi(i+1)/cj(i);
+        A(i,i+num_comp_b+1) = gi(i+num_comp_b+1)/cj(i);
+    <span class="keyword">elseif</span> i == num_comp_a+num_comp_b+1 <span class="comment">%Afterbranch mode</span>
+        A(i,i-num_comp_b-1)= gi(i)/cj(i);
+        A(i,i)=-(gi(i)+gjm(i)+gi(i+1))/cj(i);
+        A(i,i+1)= gi(i+1)/cj(i);
+    <span class="keyword">elseif</span> i == num_comp_a+num_comp_b <span class="comment">% End of the subbranch</span>
+        A(i,i-1)= gi(i)/cj(i);
+        A(i,i) =-(gi(i)+gjm(i))/cj(i);
+    <span class="keyword">elseif</span> i ==  num_comp_a +num_comp_b+num_comp_c <span class="comment">%End of the subbranch</span>
+        A(i,i-1)= gi(i)/cj(i);
+        A(i,i)=-(gi(i)+gjm(i))/cj(i);
+    <span class="keyword">else</span>
+        A(i,i-1)= gi(i)/cj(i);
+        A(i,i)=-(gi(i)+gjm(i)+gi(i+1))/cj(i);
+        A(i,i+1)= gi(i+1)/cj(i);
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+v = -inv(A)*B*u;
+
+<span class="comment">% Analytical</span>
+alambda = sqrt((ra*Rm)/(2*Ri));
+blambda = sqrt((rb*Rm)/(2*Ri));
+clambda = sqrt((rc*Rm)/(2*Ri));
+
+La=la/alambda;
+Lb=lb/blambda;
+Lc=lc/clambda;
+
+Ga_inf =(pi*(ra^2))/(Ri*alambda);
+Gb_inf =(pi*(rb^2))/(Ri*blambda);
+Gc_inf =(pi*(rc^2))/(Ri*clambda);
+
+Gb_out = Ga_inf * tanh(La)+Gc_inf * tanh(Lc);
+
+Gb_in = Gb_inf * (Gb_out/Gb_inf+tanh(Lb))/(1+Gb_out/Gb_inf*tanh(Lb));
+
+Vb_0 = Iapp/Gb_in;
+Va_0 = Vb_0 * 1/(cosh(Lb)+Gb_out/Gb_inf*sinh(Lb));
+Vc_0 = Va_0;
+
+Va_X =@(X) Va_0 * cosh(La-X)/cosh(La);
+Vb_X =@(X) Vb_0 * (cosh(Lb-X)+(Gb_out/Gb_inf * sinh(Lb-X)))/(cosh(Lb)+(Gb_out/Gb_inf * sinh(Lb)));
+Vc_X =@(X) Vc_0 * cosh(Lc-X)/cosh(Lc);
+
+Xa = linspace(0,La,num_comp_a);
+Xb = linspace(0,Lb,num_comp_b);
+Xc = linspace(0,Lc,num_comp_c);
+
+preflip = Va_X(Xa);
+flip_Va = fliplr(preflip);
+
+preflip = Vb_X(Xb);
+flip_Vb = fliplr(preflip);
+
+copyvc = Vc_X(Xc);
+
+<span class="comment">% Numerical (Compartmental)</span>
+V = zeros(num_comp_a+num_comp_b+num_comp_c,2);
+V(:,1) = v;
+<span class="keyword">for</span> i = 1: num_comp_a
+    V(i,2)=(ind_l_a/alambda)*i;
+<span class="keyword">end</span>
+
+<span class="keyword">for</span> i = num_comp_a+1 : num_comp_a + num_comp_b
+    V(i,2)=2*(ind_l_a/alambda)+(ind_l_b/blambda)*(n-num_comp_a);
+<span class="keyword">end</span>
+
+<span class="keyword">for</span> i = num_comp_a+num_comp_b+1 : num_comp_a+num_comp_b+num_comp_c
+    V(i,2)=2*(ind_l_a/alambda)+(ind_l_c/clambda)*(n-num_comp_a-num_comp_b);
+<span class="keyword">end</span>
+
+figure; clf; hold <span class="string">on</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+plot(Xa,flip_Va,<span class="string">'r'</span>,<span class="string">'DisplayName'</span>,<span class="string">'La - Analytical'</span>)
+plot(Xb+La,flip_Vb,<span class="string">'b'</span>,<span class="string">'DisplayName'</span>,<span class="string">'Lb - Analytical'</span>)
+plot(Xc+La,copyvc,<span class="string">'g'</span>,<span class="string">'DisplayName'</span>,<span class="string">'Lc - Analytical'</span>)
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+plot(Xa,V(1:num_comp_a,1),<span class="string">'r--'</span>,<span class="string">'DisplayName'</span>,<span class="string">'La - Numerical'</span>)
+plot(Xb+La,V(num_comp_a+1 : num_comp_a + num_comp_b,1),<span class="string">'b--'</span>,<span class="string">'DisplayName'</span>,<span class="string">'Lb - Numerical'</span>)
+plot(Xc+La,V(num_comp_a+num_comp_b+1 : num_comp_a+num_comp_b+num_comp_c,1),<span class="keyword">...</span>
+    <span class="string">'g--'</span>,<span class="string">'DisplayName'</span>,<span class="string">'Lc - Numerical'</span>);
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+legend(<span class="string">'Show'</span>, <span class="string">'Location'</span>, <span class="string">'Best'</span>)
+xlabel(<span class="string">'Dimensionless Length'</span>); ylabel(<span class="string">'V [mV]'</span>);
+title(<span class="string">'Steady State voltage across all branches vs. dimensionless distance from the soma'</span>);
+axis <span class="string">tight</span>; axis <span class="string">manual</span>
+disp(<span class="string">'The numerical solution fits with the analytical solution very well. It has better fitting compared with the plot in part B'</span>)
+</pre><pre class="codeoutput">The numerical solution fits with the analytical solution very well. It has better fitting compared with the plot in part B
+</pre><img vspace="5" hspace="5" src="Problem_2_04.png" alt=""> <h2 id="7">(G)</h2><pre class="codeinput">num_comp_a = 100; <span class="comment">%number of compartments in a</span>
+num_comp_b = 50;
+num_comp_c = 100;
+
+ind_l_a = la/num_comp_a;
+ind_l_b = lb/num_comp_b;
+ind_l_c = lc/num_comp_c;
+
+A = NaN(1,num_comp_a);
+B = NaN(1,num_comp_b);
+C = NaN(1,num_comp_c);
+
+A(:) = ind_l_a;
+B(:) = ind_l_b;
+C(:) = ind_l_c;
+
+matrix_length_compartment =[A,B,C];
+
+A(:) = ra;
+B(:) = rb;
+C(:) = rc;
+
+matrix_radius_compartment =[A,B,C];
+
+gi = pi .* matrix_radius_compartment.^2 ./ matrix_length_compartment .* Gi;
+cj = 2*pi.*matrix_radius_compartment.*matrix_length_compartment*Cm;
+gjm = 2*pi.*matrix_radius_compartment.*matrix_length_compartment*Gm;
+
+n=num_comp_a+num_comp_b+num_comp_c;
+A = zeros(n,n);
+B = A;
+v = zeros(n,1);
+u = v;
+u(num_comp_a+num_comp_b/2,1)=Iapp;
+u(num_comp_a+num_comp_b,1)=Iapp;
+<span class="keyword">for</span> i = 1:n
+    B(i,i)=(1/cj(i));
+    <span class="keyword">if</span> i == 1 <span class="comment">%Initial mode</span>
+        A(i,i)=-(gjm(i)+gi(i+1))/cj(i);
+        A(i,i+1)=gi(i+1)/cj(i);
+    <span class="keyword">elseif</span> i == num_comp_a <span class="comment">%Prebranch mode</span>
+        A(i,i-1)= gi(i)/cj(i);
+        A(i,i) =-(gi(i)+gjm(i)+gi(i+1)+gi(num_comp_a+num_comp_b+1))/cj(i);
+        A(i,i+1)= gi(i+1)/cj(i);
+        A(i,i+num_comp_b+1) = gi(i+num_comp_b+1)/cj(i);
+    <span class="keyword">elseif</span> i == num_comp_a+num_comp_b+1 <span class="comment">%Afterbranch mode</span>
+        A(i,i-num_comp_b-1)= gi(i)/cj(i);
+        A(i,i)=-(gi(i)+gjm(i)+gi(i+1))/cj(i);
+        A(i,i+1)= gi(i+1)/cj(i);
+    <span class="keyword">elseif</span> i == num_comp_a+num_comp_b <span class="comment">% End of the subbranch</span>
+        A(i,i-1)= gi(i)/cj(i);
+        A(i,i) =-(gi(i)+gjm(i))/cj(i);
+    <span class="keyword">elseif</span> i ==  num_comp_a +num_comp_b+num_comp_c <span class="comment">%End of the subbranch</span>
+        A(i,i-1)= gi(i)/cj(i);
+        A(i,i)=-(gi(i)+gjm(i))/cj(i);
+    <span class="keyword">else</span>
+        A(i,i-1)= gi(i)/cj(i);
+        A(i,i)=-(gi(i)+gjm(i)+gi(i+1))/cj(i);
+        A(i,i+1)= gi(i+1)/cj(i);
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+v = -inv(A)*B*u;
+
+<span class="comment">% Analytical</span>
+alambda = sqrt((ra*Rm)/(2*Ri));
+blambda = sqrt((rb*Rm)/(2*Ri));
+clambda = sqrt((rc*Rm)/(2*Ri));
+
+La=la/alambda;
+Lb=lb/blambda;
+Lc=lc/clambda;
+
+Ga_inf =(pi*(ra^2))/(Ri*alambda);
+Gb_inf =(pi*(rb^2))/(Ri*blambda);
+Gc_inf =(pi*(rc^2))/(Ri*clambda);
+
+Gb_out = Ga_inf * tanh(La)+Gc_inf * tanh(Lc);
+
+Gb_in = Gb_inf * (Gb_out/Gb_inf+tanh(Lb))/(1+Gb_out/Gb_inf*tanh(Lb));
+
+Vb_0 = Iapp/Gb_in;
+Va_0 = Vb_0 * 1/(cosh(Lb)+Gb_out/Gb_inf*sinh(Lb));
+Vc_0 = Va_0;
+
+Va_X =@(X) Va_0 * cosh(La-X)/cosh(La);
+Vb_X =@(X) Vb_0 * (cosh(Lb-X)+(Gb_out/Gb_inf * sinh(Lb-X)))/(cosh(Lb)+(Gb_out/Gb_inf * sinh(Lb)));
+Vc_X =@(X) Vc_0 * cosh(Lc-X)/cosh(Lc);
+
+Xa = linspace(0,La,num_comp_a);
+Xb = linspace(0,Lb,num_comp_b);
+Xc = linspace(0,Lc,num_comp_c);
+
+preflip = Va_X(Xa);
+flip_Va = fliplr(preflip);
+
+preflip = Vb_X(Xb);
+flip_Vb = fliplr(preflip);
+
+copyvc = Vc_X(Xc);
+
+<span class="comment">% Numerical (Compartmental)</span>
+V = zeros(num_comp_a+num_comp_b+num_comp_c,2);
+V(:,1) = v;
+<span class="keyword">for</span> i = 1: num_comp_a
+    V(i,2)=(ind_l_a/alambda)*i;
+<span class="keyword">end</span>
+
+<span class="keyword">for</span> i = num_comp_a+1 : num_comp_a + num_comp_b
+    V(i,2)=2*(ind_l_a/alambda)+(ind_l_b/blambda)*(n-num_comp_a);
+<span class="keyword">end</span>
+
+<span class="keyword">for</span> i = num_comp_a+num_comp_b+1 : num_comp_a+num_comp_b+num_comp_c
+    V(i,2)=2*(ind_l_a/alambda)+(ind_l_c/clambda)*(n-num_comp_a-num_comp_b);
+<span class="keyword">end</span>
+
+figure; clf; hold <span class="string">on</span>
+plot(Xa,V(1:num_comp_a,1),<span class="string">'r--'</span>,<span class="string">'DisplayName'</span>,<span class="string">'La - Numerical'</span>)
+plot(Xb+La,V(num_comp_a+1 : num_comp_a + num_comp_b,1),<span class="string">'b--'</span>,<span class="string">'DisplayName'</span>,<span class="string">'Lb - Numerical'</span>)
+plot(Xc+La,V(num_comp_a+num_comp_b+1 : n,1),<span class="keyword">...</span>
+    <span class="string">'g--'</span>,<span class="string">'DisplayName'</span>,<span class="string">'Lc - Numerical'</span>);
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+legend(<span class="string">'Show'</span>, <span class="string">'Location'</span>, <span class="string">'Best'</span>)
+xlabel(<span class="string">'Dimensionless Length'</span>); ylabel(<span class="string">'V [mV]'</span>);
+title(<span class="string">'Steady State voltage across all branches vs. dimensionless distance from the soma'</span>);
+axis <span class="string">tight</span>; axis <span class="string">manual</span>
+</pre><img vspace="5" hspace="5" src="Problem_2_05.png" alt=""> <p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2017a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% HW 4. Problem 2
+Ri = 100;
+Rm = 10000;
+Cm = 1;
+Er = 0;
+
+Gi =1/Ri;
+Gm = 1/Rm;
+
+la = 0.1;
+lb = 0.025;
+lc = 0.05;
+
+ra = 0.0005;
+rb = 0.000125;
+rc = 0.000125;
+
+Iapp = 1e-9;
+
+num_comp_a = 2; %number of compartments in a 
+num_comp_b = 2;
+num_comp_c = 2;
+
+ind_l_a = la/num_comp_a;
+ind_l_b = lb/num_comp_b;
+ind_l_c = lc/num_comp_c;
+
+A = NaN(1,num_comp_a);
+B = NaN(1,num_comp_b);
+C = NaN(1,num_comp_c);
+
+A(:) = ind_l_a;
+B(:) = ind_l_b;
+C(:) = ind_l_c;
+
+matrix_length_compartment =[A,B,C];
+
+A(:) = ra;
+B(:) = rb;
+C(:) = rc;
+
+matrix_radius_compartment =[A,B,C];
+
+gi = pi .* matrix_radius_compartment.^2 ./ matrix_length_compartment .* Gi;
+cj = 2*pi.*matrix_radius_compartment.*matrix_length_compartment*Cm;
+gjm = 2*pi.*matrix_radius_compartment.*matrix_length_compartment*Gm;
+
+n=num_comp_a+num_comp_b+num_comp_c;
+A = zeros(n,n);
+B = A;
+v = zeros(n,1);
+u = v;
+u(num_comp_a+num_comp_b,1)=Iapp;
+for i = 1:n
+    B(i,i)=(1/cj(i));
+    if i == 1 %Initial mode
+        A(i,i)=-(gjm(i)+gi(i+1))/cj(i);
+        A(i,i+1)=gi(i+1)/cj(i);
+    elseif i == num_comp_a %Prebranch mode
+        A(i,i-1)= gi(i)/cj(i);
+        A(i,i) =-(gi(i)+gjm(i)+gi(i+1)+gi(num_comp_a+num_comp_b+1))/cj(i);
+        A(i,i+1)= gi(i+1)/cj(i);
+        A(i,i+num_comp_b+1) = gi(i+num_comp_b+1)/cj(i);
+    elseif i == num_comp_a+num_comp_b+1 %Afterbranch mode
+        A(i,i-num_comp_b-1)= gi(i)/cj(i);
+        A(i,i)=-(gi(i)+gjm(i)+gi(i+1))/cj(i);
+        A(i,i+1)= gi(i+1)/cj(i);    
+    elseif i == num_comp_a+num_comp_b % End of the subbranch
+        A(i,i-1)= gi(i)/cj(i);
+        A(i,i) =-(gi(i)+gjm(i))/cj(i);
+    elseif i ==  num_comp_a +num_comp_b+num_comp_c %End of the subbranch
+        A(i,i-1)= gi(i)/cj(i);
+        A(i,i)=-(gi(i)+gjm(i))/cj(i);
+    else 
+        A(i,i-1)= gi(i)/cj(i);
+        A(i,i)=-(gi(i)+gjm(i)+gi(i+1))/cj(i);
+        A(i,i+1)= gi(i+1)/cj(i);    
+    end
+end
+
+v = -inv(A)*B*u;
+% i
+disp('For i, I directly wrote the matrix A in the loop so my answer is in my code')
+% iii 
+disp('B=')
+disp(B)
+% iv
+disp('u=')
+disp(u)
+
+%% (B)
+% Analytical
+alambda = sqrt((ra*Rm)/(2*Ri));
+blambda = sqrt((rb*Rm)/(2*Ri));
+clambda = sqrt((rc*Rm)/(2*Ri));
+
+La=la/alambda;
+Lb=lb/blambda;
+Lc=lc/clambda;
+
+Ga_inf =(pi*(ra^2))/(Ri*alambda);
+Gb_inf =(pi*(rb^2))/(Ri*blambda);
+Gc_inf =(pi*(rc^2))/(Ri*clambda);
+
+Gb_out = Ga_inf * tanh(La)+Gc_inf * tanh(Lc);
+
+Gb_in = Gb_inf * (Gb_out/Gb_inf+tanh(Lb))/(1+Gb_out/Gb_inf*tanh(Lb));
+
+Vb_0 = Iapp/Gb_in;
+Va_0 = Vb_0 * 1/(cosh(Lb)+Gb_out/Gb_inf*sinh(Lb));
+Vc_0 = Va_0;
+
+Va_X =@(X) Va_0 * cosh(La-X)/cosh(La);
+Vb_X =@(X) Vb_0 * (cosh(Lb-X)+(Gb_out/Gb_inf * sinh(Lb-X)))/(cosh(Lb)+(Gb_out/Gb_inf * sinh(Lb)));
+Vc_X =@(X) Vc_0 * cosh(Lc-X)/cosh(Lc);
+
+Xa = linspace(0,La,num_comp_a);
+Xb = linspace(0,Lb,num_comp_b);
+Xc = linspace(0,Lc,num_comp_c);
+
+preflip = Va_X(Xa);
+flip_Va = fliplr(preflip);
+
+preflip = Vb_X(Xb);
+flip_Vb = fliplr(preflip);
+
+copyvc = Vc_X(Xc);
+
+% Numerical (Compartmental)
+V = zeros(n,2);
+V(:,1) = v;
+for i = 1: num_comp_a
+    V(i,2)=(ind_l_a/alambda)*i;
+end
+
+for i = num_comp_a+1 : num_comp_a + num_comp_b
+    V(i,2)=2*(ind_l_a/alambda)+(ind_l_b/blambda)*(n-num_comp_a);
+end
+
+for i = num_comp_a+num_comp_b+1 : num_comp_a+num_comp_b+num_comp_c
+    V(i,2)=2*(ind_l_a/alambda)+(ind_l_c/clambda)*(n-num_comp_a-num_comp_b);
+end
+
+figure; clf; hold on
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+plot(Xa,flip_Va,'r','DisplayName','La - Analytical')
+plot(Xb+La,flip_Vb,'b','DisplayName','Lb - Analytical')
+plot(Xc+La,copyvc,'g','DisplayName','Lc - Analytical')
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+plot(Xa,V(1:num_comp_a,1),'rREPLACE_WITH_DASH_DASH','DisplayName','La - Numerical')
+plot(Xb+La,V(num_comp_a+1 : num_comp_a + num_comp_b,1),'bREPLACE_WITH_DASH_DASH','DisplayName','Lb - Numerical')
+plot(Xc+La,V(num_comp_a+num_comp_b+1 : num_comp_a+num_comp_b+num_comp_c,1),...
+    'gREPLACE_WITH_DASH_DASH','DisplayName','Lc - Numerical');
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+legend('Show', 'Location', 'Best')
+xlabel('Dimensionless Length'); ylabel('V [mV]');
+title('Steady State voltage across all branches vs. dimensionless distance from the soma');
+axis tight; axis manual
+disp('The numerical solution does not match completely with the anayltical solution because of the small number of compartments but the trend is similar')
+%% (C)
+num_comp_a_min = ceil(la/(alambda*0.1));
+num_comp_b_min = ceil(lb/(blambda*0.1));
+num_comp_c_min = ceil(lc/(clambda*0.1));
+
+disp('the minimum number of compartments in A is')
+disp(num_comp_a_min)
+disp('the minimum number of compartments in B is')
+disp(num_comp_b_min)
+disp('the minimum number of compartments in C is')
+disp(num_comp_c_min)
+
+%% (D)
+num_comp_a = 10; %number of compartments in a 
+num_comp_b = 5;
+num_comp_c = 10;
+
+ind_l_a = la/num_comp_a;
+ind_l_b = lb/num_comp_b;
+ind_l_c = lc/num_comp_c;
+
+A = NaN(1,num_comp_a);
+B = NaN(1,num_comp_b);
+C = NaN(1,num_comp_c);
+
+A(:) = ind_l_a;
+B(:) = ind_l_b;
+C(:) = ind_l_c;
+
+matrix_length_compartment =[A,B,C];
+
+A(:) = ra;
+B(:) = rb;
+C(:) = rc;
+
+matrix_radius_compartment =[A,B,C];
+
+gi = pi .* matrix_radius_compartment.^2 ./ matrix_length_compartment .* Gi;
+cj = 2*pi.*matrix_radius_compartment.*matrix_length_compartment*Cm;
+gjm = 2*pi.*matrix_radius_compartment.*matrix_length_compartment*Gm;
+
+n=num_comp_a+num_comp_b+num_comp_c;
+A = zeros(n,n);
+B = A;
+v = zeros(n,1);
+u = v;
+u(num_comp_a+num_comp_b,1)=Iapp;
+for i = 1:n
+    B(i,i)=(1/cj(i));
+    if i == 1 %Initial mode
+        A(i,i)=-(gjm(i)+gi(i+1))/cj(i);
+        A(i,i+1)=gi(i+1)/cj(i);
+    elseif i == num_comp_a %Prebranch mode
+        A(i,i-1)= gi(i)/cj(i);
+        A(i,i) =-(gi(i)+gjm(i)+gi(i+1)+gi(num_comp_a+num_comp_b+1))/cj(i);
+        A(i,i+1)= gi(i+1)/cj(i);
+        A(i,i+num_comp_b+1) = gi(i+num_comp_b+1)/cj(i);
+    elseif i == num_comp_a+num_comp_b+1 %Afterbranch mode
+        A(i,i-num_comp_b-1)= gi(i)/cj(i);
+        A(i,i)=-(gi(i)+gjm(i)+gi(i+1))/cj(i);
+        A(i,i+1)= gi(i+1)/cj(i);    
+    elseif i == num_comp_a+num_comp_b % End of the subbranch
+        A(i,i-1)= gi(i)/cj(i);
+        A(i,i) =-(gi(i)+gjm(i))/cj(i);
+    elseif i ==  num_comp_a +num_comp_b+num_comp_c %End of the subbranch
+        A(i,i-1)= gi(i)/cj(i);
+        A(i,i)=-(gi(i)+gjm(i))/cj(i);
+    else 
+        A(i,i-1)= gi(i)/cj(i);
+        A(i,i)=-(gi(i)+gjm(i)+gi(i+1))/cj(i);
+        A(i,i+1)= gi(i+1)/cj(i);    
+    end
+end
+
+v = -inv(A)*B*u;
+
+% Analytical
+alambda = sqrt((ra*Rm)/(2*Ri));
+blambda = sqrt((rb*Rm)/(2*Ri));
+clambda = sqrt((rc*Rm)/(2*Ri));
+
+La=la/alambda;
+Lb=lb/blambda;
+Lc=lc/clambda;
+
+Ga_inf =(pi*(ra^2))/(Ri*alambda);
+Gb_inf =(pi*(rb^2))/(Ri*blambda);
+Gc_inf =(pi*(rc^2))/(Ri*clambda);
+
+Gb_out = Ga_inf * tanh(La)+Gc_inf * tanh(Lc);
+
+Gb_in = Gb_inf * (Gb_out/Gb_inf+tanh(Lb))/(1+Gb_out/Gb_inf*tanh(Lb));
+
+Vb_0 = Iapp/Gb_in;
+Va_0 = Vb_0 * 1/(cosh(Lb)+Gb_out/Gb_inf*sinh(Lb));
+Vc_0 = Va_0;
+
+Va_X =@(X) Va_0 * cosh(La-X)/cosh(La);
+Vb_X =@(X) Vb_0 * (cosh(Lb-X)+(Gb_out/Gb_inf * sinh(Lb-X)))/(cosh(Lb)+(Gb_out/Gb_inf * sinh(Lb)));
+Vc_X =@(X) Vc_0 * cosh(Lc-X)/cosh(Lc);
+
+Xa = linspace(0,La,num_comp_a);
+Xb = linspace(0,Lb,num_comp_b);
+Xc = linspace(0,Lc,num_comp_c);
+
+preflip = Va_X(Xa);
+flip_Va = fliplr(preflip);
+
+preflip = Vb_X(Xb);
+flip_Vb = fliplr(preflip);
+
+copyvc = Vc_X(Xc);
+
+% Numerical (Compartmental)
+V = zeros(num_comp_a+num_comp_b+num_comp_c,2);
+V(:,1) = v;
+for i = 1: num_comp_a
+    V(i,2)=(ind_l_a/alambda)*i;
+end
+
+for i = num_comp_a+1 : num_comp_a + num_comp_b
+    V(i,2)=2*(ind_l_a/alambda)+(ind_l_b/blambda)*(n-num_comp_a);
+end
+
+for i = num_comp_a+num_comp_b+1 : num_comp_a+num_comp_b+num_comp_c
+    V(i,2)=2*(ind_l_a/alambda)+(ind_l_c/clambda)*(n-num_comp_a-num_comp_b);
+end
+
+figure; clf; hold on
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+plot(Xa,flip_Va,'r','DisplayName','La - Analytical')
+plot(Xb+La,flip_Vb,'b','DisplayName','Lb - Analytical')
+plot(Xc+La,copyvc,'g','DisplayName','Lc - Analytical')
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+plot(Xa,V(1:num_comp_a,1),'rREPLACE_WITH_DASH_DASH','DisplayName','La - Numerical')
+plot(Xb+La,V(num_comp_a+1 : num_comp_a + num_comp_b,1),'bREPLACE_WITH_DASH_DASH','DisplayName','Lb - Numerical')
+plot(Xc+La,V(num_comp_a+num_comp_b+1 : num_comp_a+num_comp_b+num_comp_c,1),...
+    'gREPLACE_WITH_DASH_DASH','DisplayName','Lc - Numerical');
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+legend('Show', 'Location', 'Best')
+xlabel('Dimensionless Length'); ylabel('V [mV]');
+title('Steady State voltage across all branches vs. dimensionless distance from the soma');
+axis tight; axis manual
+disp('the answer in D has better fitting between the analytical solution and the numerical solution compare with part B, although the analytical solution does not match up with the numerical solution completely. This is because there are more compartments')
+%% (E)
+dvdt =@(V1) A*V1+ B*u;
+t_span =linspace(0,3e5,100000);
+V0 = zeros(1,n);
+tc = Rm * Cm; 
+[t,V1]=ode23(@(t,V1) dvdt(V1),t_span,V0);
+
+figure;clf; hold on;
+xlabel('T'); ylabel('V(X) [mV]');
+title('membrane potential at the soma over dimensionless time')
+for i = 1:n
+plot(t/tc,V1(:,i))
+end
+
+%% (F)
+
+num_comp_a = 100; %number of compartments in a 
+num_comp_b = 50;
+num_comp_c = 100;
+
+ind_l_a = la/num_comp_a;
+ind_l_b = lb/num_comp_b;
+ind_l_c = lc/num_comp_c;
+
+A = NaN(1,num_comp_a);
+B = NaN(1,num_comp_b);
+C = NaN(1,num_comp_c);
+
+A(:) = ind_l_a;
+B(:) = ind_l_b;
+C(:) = ind_l_c;
+
+matrix_length_compartment =[A,B,C];
+
+A(:) = ra;
+B(:) = rb;
+C(:) = rc;
+
+matrix_radius_compartment =[A,B,C];
+
+gi = pi .* matrix_radius_compartment.^2 ./ matrix_length_compartment .* Gi;
+cj = 2*pi.*matrix_radius_compartment.*matrix_length_compartment*Cm;
+gjm = 2*pi.*matrix_radius_compartment.*matrix_length_compartment*Gm;
+
+n=num_comp_a+num_comp_b+num_comp_c;
+A = zeros(n,n);
+B = A;
+v = zeros(n,1);
+u = v;
+u(num_comp_a+num_comp_b,1)=Iapp;
+for i = 1:n
+    B(i,i)=(1/cj(i));
+    if i == 1 %Initial mode
+        A(i,i)=-(gjm(i)+gi(i+1))/cj(i);
+        A(i,i+1)=gi(i+1)/cj(i);
+    elseif i == num_comp_a %Prebranch mode
+        A(i,i-1)= gi(i)/cj(i);
+        A(i,i) =-(gi(i)+gjm(i)+gi(i+1)+gi(num_comp_a+num_comp_b+1))/cj(i);
+        A(i,i+1)= gi(i+1)/cj(i);
+        A(i,i+num_comp_b+1) = gi(i+num_comp_b+1)/cj(i);
+    elseif i == num_comp_a+num_comp_b+1 %Afterbranch mode
+        A(i,i-num_comp_b-1)= gi(i)/cj(i);
+        A(i,i)=-(gi(i)+gjm(i)+gi(i+1))/cj(i);
+        A(i,i+1)= gi(i+1)/cj(i);    
+    elseif i == num_comp_a+num_comp_b % End of the subbranch
+        A(i,i-1)= gi(i)/cj(i);
+        A(i,i) =-(gi(i)+gjm(i))/cj(i);
+    elseif i ==  num_comp_a +num_comp_b+num_comp_c %End of the subbranch
+        A(i,i-1)= gi(i)/cj(i);
+        A(i,i)=-(gi(i)+gjm(i))/cj(i);
+    else 
+        A(i,i-1)= gi(i)/cj(i);
+        A(i,i)=-(gi(i)+gjm(i)+gi(i+1))/cj(i);
+        A(i,i+1)= gi(i+1)/cj(i);    
+    end
+end
+
+v = -inv(A)*B*u;
+
+% Analytical
+alambda = sqrt((ra*Rm)/(2*Ri));
+blambda = sqrt((rb*Rm)/(2*Ri));
+clambda = sqrt((rc*Rm)/(2*Ri));
+
+La=la/alambda;
+Lb=lb/blambda;
+Lc=lc/clambda;
+
+Ga_inf =(pi*(ra^2))/(Ri*alambda);
+Gb_inf =(pi*(rb^2))/(Ri*blambda);
+Gc_inf =(pi*(rc^2))/(Ri*clambda);
+
+Gb_out = Ga_inf * tanh(La)+Gc_inf * tanh(Lc);
+
+Gb_in = Gb_inf * (Gb_out/Gb_inf+tanh(Lb))/(1+Gb_out/Gb_inf*tanh(Lb));
+
+Vb_0 = Iapp/Gb_in;
+Va_0 = Vb_0 * 1/(cosh(Lb)+Gb_out/Gb_inf*sinh(Lb));
+Vc_0 = Va_0;
+
+Va_X =@(X) Va_0 * cosh(La-X)/cosh(La);
+Vb_X =@(X) Vb_0 * (cosh(Lb-X)+(Gb_out/Gb_inf * sinh(Lb-X)))/(cosh(Lb)+(Gb_out/Gb_inf * sinh(Lb)));
+Vc_X =@(X) Vc_0 * cosh(Lc-X)/cosh(Lc);
+
+Xa = linspace(0,La,num_comp_a);
+Xb = linspace(0,Lb,num_comp_b);
+Xc = linspace(0,Lc,num_comp_c);
+
+preflip = Va_X(Xa);
+flip_Va = fliplr(preflip);
+
+preflip = Vb_X(Xb);
+flip_Vb = fliplr(preflip);
+
+copyvc = Vc_X(Xc);
+
+% Numerical (Compartmental)
+V = zeros(num_comp_a+num_comp_b+num_comp_c,2);
+V(:,1) = v;
+for i = 1: num_comp_a
+    V(i,2)=(ind_l_a/alambda)*i;
+end
+
+for i = num_comp_a+1 : num_comp_a + num_comp_b
+    V(i,2)=2*(ind_l_a/alambda)+(ind_l_b/blambda)*(n-num_comp_a);
+end
+
+for i = num_comp_a+num_comp_b+1 : num_comp_a+num_comp_b+num_comp_c
+    V(i,2)=2*(ind_l_a/alambda)+(ind_l_c/clambda)*(n-num_comp_a-num_comp_b);
+end
+
+figure; clf; hold on
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+plot(Xa,flip_Va,'r','DisplayName','La - Analytical')
+plot(Xb+La,flip_Vb,'b','DisplayName','Lb - Analytical')
+plot(Xc+La,copyvc,'g','DisplayName','Lc - Analytical')
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+plot(Xa,V(1:num_comp_a,1),'rREPLACE_WITH_DASH_DASH','DisplayName','La - Numerical')
+plot(Xb+La,V(num_comp_a+1 : num_comp_a + num_comp_b,1),'bREPLACE_WITH_DASH_DASH','DisplayName','Lb - Numerical')
+plot(Xc+La,V(num_comp_a+num_comp_b+1 : num_comp_a+num_comp_b+num_comp_c,1),...
+    'gREPLACE_WITH_DASH_DASH','DisplayName','Lc - Numerical');
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+legend('Show', 'Location', 'Best')
+xlabel('Dimensionless Length'); ylabel('V [mV]');
+title('Steady State voltage across all branches vs. dimensionless distance from the soma');
+axis tight; axis manual
+disp('The numerical solution fits with the analytical solution very well. It has better fitting compared with the plot in part B')
+%% (G)
+
+num_comp_a = 100; %number of compartments in a 
+num_comp_b = 50;
+num_comp_c = 100;
+
+ind_l_a = la/num_comp_a;
+ind_l_b = lb/num_comp_b;
+ind_l_c = lc/num_comp_c;
+
+A = NaN(1,num_comp_a);
+B = NaN(1,num_comp_b);
+C = NaN(1,num_comp_c);
+
+A(:) = ind_l_a;
+B(:) = ind_l_b;
+C(:) = ind_l_c;
+
+matrix_length_compartment =[A,B,C];
+
+A(:) = ra;
+B(:) = rb;
+C(:) = rc;
+
+matrix_radius_compartment =[A,B,C];
+
+gi = pi .* matrix_radius_compartment.^2 ./ matrix_length_compartment .* Gi;
+cj = 2*pi.*matrix_radius_compartment.*matrix_length_compartment*Cm;
+gjm = 2*pi.*matrix_radius_compartment.*matrix_length_compartment*Gm;
+
+n=num_comp_a+num_comp_b+num_comp_c;
+A = zeros(n,n);
+B = A;
+v = zeros(n,1);
+u = v;
+u(num_comp_a+num_comp_b/2,1)=Iapp;
+u(num_comp_a+num_comp_b,1)=Iapp;
+for i = 1:n
+    B(i,i)=(1/cj(i));
+    if i == 1 %Initial mode
+        A(i,i)=-(gjm(i)+gi(i+1))/cj(i);
+        A(i,i+1)=gi(i+1)/cj(i);
+    elseif i == num_comp_a %Prebranch mode
+        A(i,i-1)= gi(i)/cj(i);
+        A(i,i) =-(gi(i)+gjm(i)+gi(i+1)+gi(num_comp_a+num_comp_b+1))/cj(i);
+        A(i,i+1)= gi(i+1)/cj(i);
+        A(i,i+num_comp_b+1) = gi(i+num_comp_b+1)/cj(i);
+    elseif i == num_comp_a+num_comp_b+1 %Afterbranch mode
+        A(i,i-num_comp_b-1)= gi(i)/cj(i);
+        A(i,i)=-(gi(i)+gjm(i)+gi(i+1))/cj(i);
+        A(i,i+1)= gi(i+1)/cj(i);    
+    elseif i == num_comp_a+num_comp_b % End of the subbranch
+        A(i,i-1)= gi(i)/cj(i);
+        A(i,i) =-(gi(i)+gjm(i))/cj(i);
+    elseif i ==  num_comp_a +num_comp_b+num_comp_c %End of the subbranch
+        A(i,i-1)= gi(i)/cj(i);
+        A(i,i)=-(gi(i)+gjm(i))/cj(i);
+    else 
+        A(i,i-1)= gi(i)/cj(i);
+        A(i,i)=-(gi(i)+gjm(i)+gi(i+1))/cj(i);
+        A(i,i+1)= gi(i+1)/cj(i);    
+    end
+end
+
+v = -inv(A)*B*u;
+
+% Analytical
+alambda = sqrt((ra*Rm)/(2*Ri));
+blambda = sqrt((rb*Rm)/(2*Ri));
+clambda = sqrt((rc*Rm)/(2*Ri));
+
+La=la/alambda;
+Lb=lb/blambda;
+Lc=lc/clambda;
+
+Ga_inf =(pi*(ra^2))/(Ri*alambda);
+Gb_inf =(pi*(rb^2))/(Ri*blambda);
+Gc_inf =(pi*(rc^2))/(Ri*clambda);
+
+Gb_out = Ga_inf * tanh(La)+Gc_inf * tanh(Lc);
+
+Gb_in = Gb_inf * (Gb_out/Gb_inf+tanh(Lb))/(1+Gb_out/Gb_inf*tanh(Lb));
+
+Vb_0 = Iapp/Gb_in;
+Va_0 = Vb_0 * 1/(cosh(Lb)+Gb_out/Gb_inf*sinh(Lb));
+Vc_0 = Va_0;
+
+Va_X =@(X) Va_0 * cosh(La-X)/cosh(La);
+Vb_X =@(X) Vb_0 * (cosh(Lb-X)+(Gb_out/Gb_inf * sinh(Lb-X)))/(cosh(Lb)+(Gb_out/Gb_inf * sinh(Lb)));
+Vc_X =@(X) Vc_0 * cosh(Lc-X)/cosh(Lc);
+
+Xa = linspace(0,La,num_comp_a);
+Xb = linspace(0,Lb,num_comp_b);
+Xc = linspace(0,Lc,num_comp_c);
+
+preflip = Va_X(Xa);
+flip_Va = fliplr(preflip);
+
+preflip = Vb_X(Xb);
+flip_Vb = fliplr(preflip);
+
+copyvc = Vc_X(Xc);
+
+% Numerical (Compartmental)
+V = zeros(num_comp_a+num_comp_b+num_comp_c,2);
+V(:,1) = v;
+for i = 1: num_comp_a
+    V(i,2)=(ind_l_a/alambda)*i;
+end
+
+for i = num_comp_a+1 : num_comp_a + num_comp_b
+    V(i,2)=2*(ind_l_a/alambda)+(ind_l_b/blambda)*(n-num_comp_a);
+end
+
+for i = num_comp_a+num_comp_b+1 : num_comp_a+num_comp_b+num_comp_c
+    V(i,2)=2*(ind_l_a/alambda)+(ind_l_c/clambda)*(n-num_comp_a-num_comp_b);
+end
+
+figure; clf; hold on
+plot(Xa,V(1:num_comp_a,1),'rREPLACE_WITH_DASH_DASH','DisplayName','La - Numerical')
+plot(Xb+La,V(num_comp_a+1 : num_comp_a + num_comp_b,1),'bREPLACE_WITH_DASH_DASH','DisplayName','Lb - Numerical')
+plot(Xc+La,V(num_comp_a+num_comp_b+1 : n,1),...
+    'gREPLACE_WITH_DASH_DASH','DisplayName','Lc - Numerical');
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+legend('Show', 'Location', 'Best')
+xlabel('Dimensionless Length'); ylabel('V [mV]');
+title('Steady State voltage across all branches vs. dimensionless distance from the soma');
+axis tight; axis manual
+##### SOURCE END #####
+--></body></html>
