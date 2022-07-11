@@ -13,5 +13,9 @@ Most interesting page is the population pharmacokinetics and pharmacodynamics mo
   - [Positive Force Feedback Project Abstract](https://github.com/amalieshi/Academic-Portfolio/blob/master/Miscellaneous/huishi_SFN17_Abstract.pdf)
   - [Positive Force Feedback Poster](https://github.com/amalieshi/Academic-Portfolio/blob/master/Miscellaneous/Utilizing%20an%20Artificial%20Positive%20Feedback%20Loop%20to%20Control.pdf)
 3. [Neural Feedback in the Regulation and Control of Limb and Joint Mechanics](https://github.com/amalieshi/Academic-Portfolio/blob/master/Miscellaneous/Neural%20Feedback%20Contributing%20to%20the%20Regulation%20of%20Limb%20and%20Joint%20Mechanics.pdf)
+4. Social Media
+  - [Pioneer Article 1](https://github.com/amalieshi/Academic-Portfolio/blob/master/Miscellaneous/pioneerarticle.pdf)
+  - [Atlanta Mobile Scholarship Award](https://rh.gatech.edu/news/370611/upward-mobility)
+5. [In-vitro Effects of 1,2,3,4,6-penta-O-galloyl-beta-D-glucose on NF-kB activation levels in human glioblastoma cells](https://github.com/amalieshi/Academic-Portfolio/blob/master/Miscellaneous/In%20vitro%20effects%20of%201%2C2%2C3%2C4%2C6-%20penta-O-galloyl-beta-D-glucose%20on%20NF-%CE%BAB%20activation.pdf)
 
 This page will eventually merge into my personal website with a section describing the details of each projects. Stay in tune!
