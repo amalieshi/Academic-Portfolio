@@ -4,6 +4,7 @@ This repository contains my personal course project work and homework submission
 Included in this Repository:
 ### Models of Neuron ###
 ### System Pharmacology ###
+Most interesting page is the population pharmacokinetics and pharmacodynamics of combination treatment with malaria: Check it out here at [PK/PD Model for Combination Treatment for Malaria - Project Summary](https://github.com/amalieshi/Academic-Portfolio/blob/master/System%20Pharmacology/Final%20Project%20Report/Final%20Project%20Report.pdf)
 ### System Bioengineering 2 Homework Submission ###
 ### Miscellaneous Project Work, Posters, R21 Grant Submission, and Research Abstract ###
 
