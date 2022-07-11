@@ -7,4 +7,4 @@ Included in this Repository:
 ### System Bioengineering 2 Homework Submission ###
 ### Miscellaneous Project Work, Posters, R21 Grant Submission, and Research Abstract ###
 
-This page will eventually migrated into my personal website with a section describing the details of each projects. Stay in tune!
+This page will eventually merge into my personal website with a section describing the details of each projects. Stay in tune!
