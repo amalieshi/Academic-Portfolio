@@ -1,4 +1,4 @@
-# Academic ProjectS
+# Academic Projects
 This repository contains my personal course project work and homework submissions during my Bachelor training at Georgia Institute of Technology and my Master's degree training at the Johns Hopkins University. Copyright 2022 Hui Shi, All Right Reserved. 
 
 Included in this Repository:
