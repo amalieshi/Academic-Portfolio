@@ -1,2 +1,2 @@
-# jhu-master
-personal course notes and homework submissions
+# JHU Master's Course Project
+This repository contains my personal course project work and homework submissions during my Master's degree training at the Johns Hopkins University. Copyright 2022 Hui Shi, All Right Reserved. 
