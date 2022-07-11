@@ -16,6 +16,8 @@ Most interesting page is the population pharmacokinetics and pharmacodynamics mo
 4. Social Media
   - [Pioneer Articles](https://github.com/amalieshi/Academic-Portfolio/blob/master/Miscellaneous/pioneerarticle.pdf)
   - [Atlanta Mobile Scholarship Award](https://rh.gatech.edu/news/370611/upward-mobility)
-5. [In-vitro Effects of 1,2,3,4,6-penta-O-galloyl-beta-D-glucose on NF-kB activation levels in human glioblastoma cells](https://github.com/amalieshi/Academic-Portfolio/blob/master/Miscellaneous/In%20vitro%20effects%20of%201%2C2%2C3%2C4%2C6-%20penta-O-galloyl-beta-D-glucose%20on%20NF-%CE%BAB%20activation.pdf)
-
+5. In-vitro Effects of 1,2,3,4,6-penta-O-galloyl-beta-D-glucose on NF-kB activation levels in human glioblastoma cells
+  - [Research Proposal](https://github.com/amalieshi/Academic-Portfolio/blob/master/Miscellaneous/In%20vitro%20effects%20of%201%2C2%2C3%2C4%2C6-%20penta-O-galloyl-beta-D-glucose%20on%20NF-%CE%BAB%20activation%20levels%20in%20human%20glioblastoma%20cells_Research%20Proposal.pdf)
+  - [Research Poster](https://github.com/amalieshi/Academic-Portfolio/blob/master/Miscellaneous/In%20vitro%20effects%20of%201%2C2%2C3%2C4%2C6-%20penta-O-galloyl-beta-D-glucose%20on%20NF-%CE%BAB%20activation.pdf)
+6. [Induction of AUtophagy upon Starvation](https://github.com/amalieshi/Academic-Portfolio/blob/master/Miscellaneous/autophagy%20poster.pdf)
 This page will eventually merge into my personal website with a section describing the details of each projects. Stay in tune!
