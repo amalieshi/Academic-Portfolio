@@ -23,4 +23,4 @@ Most interesting page is the population pharmacokinetics and pharmacodynamics mo
 
 
 
-**This page will eventually merge into my personal website with a section describing the details of each projects. Stay in tune!**
+**This page will be eventually merge into my personal website with a section describing the details of each projects. Stay in tune!**
